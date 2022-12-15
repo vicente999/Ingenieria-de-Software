@@ -1,0 +1,17 @@
+ @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+ .column {
+    margin:30px;
+ }
+
+ .columns{
+   overflow-x: scroll;
+ }
+
+ #logo{
+    height: auto;
+    width: auto;
+ }
+ 
+ .block:not(:last-child) {
+   margin-bottom: 1.5rem;
+ }

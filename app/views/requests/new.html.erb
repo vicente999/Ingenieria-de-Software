@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulma CSS Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+    <center>
+    <div class="column">
+    <div class="column is-one-third has-background-danger-light has-text-danger">
+    <% if @publication.avatar.present? %>
+        <figure class="image is-80x80">
+            <%= image_tag(@publication.avatar) %>
+        </figure>
+    <% else %>
+        <figure class="image is-80x80">
+            <img src="/assets/netflix-movies.jpg" alt="" >
+        </figure>
+    <%end%>
+    <a class= 'is-size-3 has-text-danger' ><%=@publication.name%></a>
+    <p><%  @publication.rating.to_i.times do  %>
+        &#11088;
+    <% end %></p></p>
+    <%= form_with(model: @request, method: :post) do |form| %>
+
+        <div class="field from-group">
+            <p> Fecha: <%=Time.now.strftime("%d/%m/%Y") %></p>
+        </div>
+
+        <div class="field from-group">
+            <p> Hora: <%=Time.now.strftime("%I:%M:%S") %></p>
+        </div>
+
+        <div class="field from-group"> 
+            <%= form.text_field :user_id, id: :request_user_id, class:"from-control", value: current_user.id, type: :hidden%>
+        </div>
+
+        <div class="field from-group"> 
+            <%= form.text_field :publication_id, class:"from-control", value: @publication.id, type: :hidden%>
+        </div>
+
+        <div>
+            <%= form.submit 'Enviar Solicitud' %>
+        </div>
+        
+    <% end %>
+        <p><%= link_to 'Cancelar', publications_index_path %></p>
+    </center>
+
+</html> 

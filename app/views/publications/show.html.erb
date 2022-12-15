@@ -1,0 +1,77 @@
+
+<center>
+<div class="column">
+<div class="column is-one-third has-background-danger-light has-text-danger">
+<% if @publication.avatar.present? %>
+    <figure class="image is-80x80">
+        <%= image_tag(@publication.avatar) %>
+    </figure>
+<% else %>
+    <figure class="image is-80x80">
+        <img src="/assets/netflix-movies.jpg" alt="" >
+    </figure>
+<%end%>
+<a class= 'is-size-3 has-text-danger' ><%=@publication.name%></a>
+<p> <%=@publication.category%></p>
+<p> <%  @publication.rating.to_i.times do  %>
+                    &#11088;
+                <% end %></p></p>
+<p> <%=@publication.description%></p>
+<p> <%=@publication.clasification%></p>   
+<p> <%=@publication.tipo%></p>
+<%if current_user.username != "moderador"%>
+        <%if @publication.users.where(id: current_user.id).exists?(conditions = :none) == false%>
+        <a class= "button is-danger is-ligth" href=<%=requests_new_path(:id => @publication.id)%>>
+        <strong>Solicitar Artículo</strong>
+        </a>
+        <%else%>
+            <% req = @publication.requests.order(created_at: :desc).find_by(user_id: current_user.id)%>
+            <%if req.status == false or  req.devolucion == true%>
+                <a class= "button is-danger is-ligth" href=<%=requests_new_path(:id => @publication.id)%>>
+                <strong>Solicitar Artículo</strong>
+                </a>
+            <%end%>
+            <%if req.status == nil%>
+                <a class= "button is-danger is-ligth" href=<%=requests_index_path%>>
+                <strong>Ver Solicitud</strong>
+                </a>
+            <%end%>
+            <%if req.status == true and req.devolucion == false%>
+                <a class= "button is-danger is-ligth" href=<%=publications_show_path(:id => publication.id)%>>
+                <strong>Arrendada</strong>
+                </a>
+            <%end%>
+            <%if req.status == true and req.devolucion != true%>
+            <p class= "button is-danger is-ligth">
+            <strong>Chat</strong>
+            </p>
+        <%end%>
+        <%end%>
+        <a class= "button is-danger is-ligth" href=<%=resenas_index_path(:id => @publication.id)%>>
+        <strong><%=@publication.resenas.count%> Reseña(s)</strong>
+        </a>
+        </center>
+        </div>
+        <center>
+        <a class= "button is-danger" href=<%=articles_path%>>
+        <strong>Atrás</strong>
+        </a>
+        </center>
+</div>
+<%else%>
+    <center>
+    <br>
+    <br>
+    <a class="button is-danger" href=<%=articles_path%>>
+    <strong>Atrás</strong>
+    </a>
+    <a class="button is-danger" href=<%=publications_edit_path(:id => @publication.id)%>>
+    <strong>Editar Publicación</strong>
+    </a>
+    <button type="button" class="button is-light"><%= link_to 'Eliminar', publications_delete_path(:id => @publication.id), method: :delete %></button>
+    </a>
+<%end%>
+<br>
+<br>
+
+</center>

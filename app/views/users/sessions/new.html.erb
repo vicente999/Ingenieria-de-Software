@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulma CSS Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+
+    <body>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="hero is-fullheight">
+            <div class="hero-body is-justify-content-center is-align-items-center">
+                <div class="columns is-flex is-flex-direction-column box">
+                    <div class="column">
+                        <label for="email">Email</label>
+                        <input class="input is-danger" type="text" placeholder="Email address" <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                    </div>
+                    <div class="column">
+                        <label for="Name">Contraseña</label>
+                        <input class="input is-danger" type="password" placeholder="Contraseña" <%= f.password_field :password, autocomplete: "current-password" %>
+                    </div>
+                    <div class="column">
+                        <button class="button is-danger is-fullwidth" type="submit" <%= f.submit%>Iniciar Sesión</button>
+                    <% end %>
+                    <a href=<%=new_password_path(resource_name) %> class="is-size-10 has-text-danger">Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="has-text-centered">
+                        <p class="is-size-10"> No tienes una cuenta? <a href=<%=new_user_registration_path%> class="has-text-danger">¡Regístrate!</a>
+                        </p>
+                        <p class="is-size-15">
+                        <a href=<%=articles_path%> class="has-text-danger">Atrás</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

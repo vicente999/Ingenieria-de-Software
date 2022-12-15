@@ -1,0 +1,31 @@
+<center>
+<div class="column is-one-quarter has-background-danger-light has-text-danger">
+        <% if @user.avatar.present? %>
+            <figure class="image is-128x128">
+                <img class="is-rounded" <%= image_tag(@user.avatar.variant(resize_to_fill: [100, 100])) %></>
+            </figure>
+        <% else %>
+            <figure class="image is-80x80">
+                <img class="is-rounded" <%= image_tag("avatar.jpg") %>
+        </figure>
+        <%end%>
+        <a class= 'is-size-3 has-text-danger' ><%=@user.username%></a>
+        <p class= 'has-text-danger' ><%=@user.email%></p>
+        <p class= 'has-text-danger' ><%=@user.birthdate%></p>
+        <% if current_user.username == "moderador" %>
+        <a class= "button is-danger is-ligth" href=<%=articles_path%>>
+        <strong>Atras</strong>
+        </a>
+        <button type="button" class="button is-light"><p><%= link_to "Eliminar Usuario", admin_destroy_user_path(@user), method: :delete, data: { confirm: "¿Estás seguro que deseas eliminar este usuario?" } %></p></button>
+        <% else %>
+        <a class= "button is-danger is-ligth" href=<%=articles_path%>>
+        <strong>Atras</strong>
+        </a>
+        <a class= "button is-ligth" href=<%=edit_user_registration_path%>>
+        <strong>Editar</strong>
+        </a>
+        <%end%>
+        </center>
+        </div>
+
+

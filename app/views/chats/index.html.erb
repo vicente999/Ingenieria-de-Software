@@ -1,0 +1,25 @@
+<br>
+<br>
+
+<center>
+<h1 class="title is-2 has-text-info">Mensajes Enviados</h1>
+
+<%= notice %>
+
+<br>
+<br>
+
+<div class="columns">
+    <% @chats.each do |chat| %>
+        <div class="column is-one-quarter has-background-info-light has-text-info">
+        <p> Usuario que envía el mensaje: <%=chat.usuario%></p>
+        <p> Mensaje: <%=chat.mensaje%></p>
+
+        <p><%= link_to 'Ver detalles', chats_show_path(:id => chat.id) %></p>  
+
+        </div>
+    <% end %>
+</div>
+
+<%= link_to 'Enviar nuevo mensaje', chats_new_path %>
+<%= link_to "Back", :root %>

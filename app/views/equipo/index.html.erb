@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+.column {
+  float: left;
+  width: 28%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  background: "is-danger"
+}
+img.rounded-corners {
+  border-radius: 50%;
+}
+</style>
+</head>
+<body>
+<center>
+<p class="title is-3 has-text-danger">&nbsp;&nbsp;Nuestro Equipo</p>
+</center>
+<div class="row">
+  <div class="column">
+  <center>
+    <div class="card has-background-danger-light has-text-danger">
+      <figure class="image">
+        <%= image_tag("iarteaga.jpg", alt:"", width: 50, class: "rounded-corners")%>
+      </figure>
+      <div class="container">
+        <h2 class= 'has-text-danger' >Ignacio Arteaga</h2>
+        <p class="title has-text-danger">CEO y Fundador</p>
+        <p class= 'has-text-danger' > Alexis Sanchez baby</p>
+        <p class= 'has-text-danger' >ignacio.arteaga@uc.cl</p>
+        <p><button class="button is-danger">Contact</button></p>
+      </div>
+    </div>
+    </center>
+  </div>
+
+  <div class="column">
+  <center>
+    <div class="card has-background-danger-light has-text-danger">
+      <figure class="image">
+        <%= image_tag("tere.jpg", alt:"", width: 50, class: "rounded-corners")%>
+      </figure>
+      <div class="container">
+        <h2>Teresita López</h2>
+        <p class="title has-text-danger">CEO y Diseñadora</p>
+        <p>Trabun is life</p>
+        <p>tlpc@uc.cl</p>
+        <p><button class="button is-danger">Contact</button></p>
+      </div>
+    </div>
+    </center>
+  </div>
+  
+  <div class="column">
+  <center>
+    <div class="card has-background-danger-light has-text-danger">
+      <figure class="image">
+        <%= image_tag("vicente.jpg", alt:"", width: 50, class: "rounded-corners")%>
+      </figure>
+      <div class="container">
+        <h2>Vicente Delpiano</h2>
+        <p class="title has-text-danger">Scrum Master</p>
+        <p>Cristiano es más que Messi.</p>
+        <p>vicente.delpiano@uc.cl</p>
+        <p><button class="button is-danger">Contact</button></p>
+      </div>
+    </div>
+    </center>
+  </div>
+</div>
+</body>

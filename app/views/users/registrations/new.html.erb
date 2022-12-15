@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulma CSS Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+
+    <body>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="hero is-fullheight">
+            <div class="hero-body is-justify-content-center is-align-items-center">
+                <div class="columns is-flex is-flex-direction-column box">
+                <a href=<%=articles_path%>>
+                  <%= image_tag("netflix-logo.png", width: 100) %>
+                </a>
+                    <div class="column">
+                        <label for="username">Nombre de Usuario</label>
+                        <input class="input is-danger" type="text" placeholder="Nombre de Usuario" <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+                    </div>
+                    <div class="column">
+                        <label for="email">Email</label>
+                        <input class="input is-danger" type="text" placeholder="Email address" <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                    </div>
+                    <div class="column">
+                        <label for="birthdate">Cumpleaños</label>
+                        <input class="input is-danger" type="date" placeholder="Cumpleaños" <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate" %>
+                    </div>
+                    <div class="column">
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> carácteres mínimos)</em>
+                    <% end %><br />
+                        <label for="Name">Contraseña</label>
+                        <input class="input is-danger" type="password" placeholder="Contraseña" <%= f.password_field :password, autocomplete: "new-password" %>
+                    </div>
+                    <div class="column">
+                        <label for="Name">Confirmar Contraseña</label>
+                        <input class="input is-danger" type="password" placeholder="Confirmar Contraseña" <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                    </div>
+                    <div class="column">
+                        <button class="button is-danger is-fullwidth" type="submit" <%= f.submit%>¡Regístrate!</button>
+                    </div>
+                    <% end %>
+                    <div class="has-text-centered">
+                        <p class="is-size-10"> Tienes una cuenta? <a href=<%=user_session_path%> class="has-text-danger">¡Inicia Sesión! </a>
+                        </p>
+                        <p class="is-size-15">
+                        <a href=<%=articles_path%> class="has-text-danger">Atrás</a>
+                        </p>
+                        <%- if devise_mapping.omniauthable? %>
+                        <%- resource_class.omniauth_providers.each do |provider| %>
+                        <%=form_for 'Registrarse', url: omniauth_authorize_path(resource_name, provider),
+                        method: :post,
+                        data: {turbo: "false"} do |f|%>
+                            <%= f.submit "Iniciar Sesión", type: 'image', src: url_for('/assets/btn_google_signin_light_normal_web.png')%>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

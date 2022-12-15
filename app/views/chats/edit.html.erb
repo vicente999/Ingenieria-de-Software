@@ -1,0 +1,19 @@
+<h1>Editar Mensaje</h1>
+
+<%= form_with(model: @chat, method: :patch, url: chats_update_path(:id => @chat.id)) do |form| %>
+
+<div> 
+    <%= form.label :Usuario %>
+    <%= form.text_field :usuario%>
+</div>
+<div>
+    <%= form.label :Mensaje %>
+    <%= form.text_field :mensaje%>
+</div>
+
+<div>
+    <%= form.submit 'Enviar Mensaje' %>
+    <p><%= link_to 'Cancelar', chats_index_path %></p>
+</div>
+
+<% end %>

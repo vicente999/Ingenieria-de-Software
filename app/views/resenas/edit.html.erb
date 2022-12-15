@@ -1,0 +1,49 @@
+<h1>Resenas#edit</h1>
+
+<%= form_with(model: @resena, method: :patch, url: resenas_update_path(:id => @resena.id)) do |form| %>
+    <div>
+        <%= form.label :Nombre_artículo%>
+        <%= form.text_field :name%>
+    </div>
+
+    <div>
+        <%= form.label :Categoría%>
+        <select name= "category" id="movie-category">
+            <option value="accion">Acción y aventura</option>
+            <option value="comedia">Comedia</option>
+            <option value="drama">Drama</option>
+            <option value="fantasia">Fantasía</option>
+            <option value="musical">Musical</option>
+            <option value="romance">Romance</option>
+            <option value="suspenso">Suspenso</option>
+            <option value="terror">Terror</option>
+        </select>
+    </div>
+
+    <div>
+        <%= form.label :Clasificación%>
+        <select name= "stars" id="movie-stars">
+            <option value=5.0>5</option>
+            <option value=4.0>4</option>
+            <option value=3.0>3</option>
+            <option value=2.0>2</option>
+            <option value=1.0>1</option>
+
+        </select>
+    </div>
+
+    <div>
+        <%= form.label :Descripción%>
+        <%= form.text_field :description%>
+    </div>
+
+    <div>
+        <%= form.submit 'Confirmar' %>
+        <p><%= link_to 'Cancelar', resenas_index_path %></p>
+    </div>
+
+<% end %>
+
+
+
+

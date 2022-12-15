@@ -1,0 +1,67 @@
+<br>
+<br>
+
+<center>
+<h1 class="title is-2 has-text-danger">Publicaciones Disponibles</h1>
+
+<br>
+<br>
+
+<div class="columns">
+
+    <% @publications.each do |publication| %>
+        <div class="column is-one-quarter has-background-danger-light has-text-danger">
+        <% if publication.avatar.present? %>
+            <figure class="image is-80x80">
+                <%= image_tag(publication.avatar) %>
+            </figure>
+        <% else %>
+            <figure class="image is-80x80">
+                <img src="/assets/netflix-movies.jpg" alt="">
+            </figure>
+        <%end%>
+        <center>
+        <a class= 'is-size-3 has-text-danger' ><%=publication.name%></a>
+        <p><%  publication.rating.to_i.times do  %>
+                            &#11088;
+                        <% end %></p></p>
+        <a class= "button is-danger is-ligth" href=<%=publications_show_path(:id => publication.id)%>>
+        <strong>Ver detalles</strong>
+        </a> 
+        <%if current_user.username != 'moderador'%>
+            <% req = publication.requests.order(created_at: :desc).find_by(user_id: current_user.id)%>
+            <%if publication.users.where(id: current_user.id).exists?(conditions = :none) == false%>
+            <a class= "button is-danger is-ligth" href=<%=requests_new_path(:id => publication.id)%>>
+            <strong>Solicitar Artículo</strong>
+            </a>
+            <%else%>
+                <%if req.status == false or  req.devolucion == true%>
+                    <a class= "button is-danger is-ligth" href=<%=requests_new_path(:id => publication.id)%>>
+                    <strong>Solicitar Artículo</strong>
+                    </a>
+                <%end%>
+                <%if req.status == nil%>
+                    <a class= "button is-danger is-ligth" href=<%=requests_index_path%>>
+                    <strong>Ver Solicitud</strong>
+                    </a>
+                <%end%>
+                <%if req.status == true and req.devolucion != true%>
+                    <a class= "button is-danger is-ligth" href=<%=requests_edit_path(:id => req.id, status: true, devolucion:true)%>>
+                    <strong>Devolver Artículo</strong>
+                    </a>
+                <%end%>
+            <%end%>
+            <%end%>
+            
+            </center>
+            </div>
+        <% end %>
+</div>
+        <a class= "button is-danger" href=<%=articles_path%>>
+            <strong>Atrás</strong>
+        </a>
+    <%if current_user.username == "moderador"%>
+        <a class="button is-light" href=<%=publications_new_path%>>
+        <strong>Crear nueva publicación</strong>
+        </a>
+    <%end%>

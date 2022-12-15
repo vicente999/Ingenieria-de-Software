@@ -1,0 +1,38 @@
+<center>
+<h1 class="title is-2 has-text-danger">Historial</h1>
+<% solicitudes = current_user.requests%>
+
+<br>
+<br>
+
+<div class="columns">
+    <% solicitudes.order(:created_at).each do |request| %>
+        <% if request.status == true and request.devolucion == true%></p>
+            <div class="column is-one-quarter has-background-danger-light has-text-danger">
+                <% if request.publication.avatar.present? %>
+                    <figure class="image is-80x80">
+                        <%= image_tag(request.publication.avatar) %>
+                    </figure>
+                <% else %>
+                    <figure class="image is-80x80">
+                        <img src="/assets/netflix-movies.jpg" alt="">
+                    </figure>
+                <%end%>
+                <br>
+                <a class= 'is-size-3 has-text-danger' ><%=request.name%></a>
+                <br>
+                
+                
+                    <p> <%=request.publication.category%></p>
+                    <p> <%  request.publication.rating.to_i.times do  %>
+                                        &#11088;
+                    <% end %></p></p>
+                    <p> <%=request.publication.description%></p>
+                    <p> Clasificación: <%=request.publication.clasification%></p>   
+                    <p> <%=request.publication.tipo%></p>
+
+             
+            </div>
+        <% end %>
+    <% end %>
+</div>

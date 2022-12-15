@@ -1,0 +1,71 @@
+<br>
+<br>
+<center>
+<h1 class="title is-2 has-text-danger">Editar Publicación</h1>
+
+<div class="column">
+<div class="column is-quarter has-background-danger-light has-text-danger">
+
+<%= form_with(model: @publication, method: :patch, url: publications_update_path(:id => @publication.id)) do |form| %>
+<% if @publication.avatar.present? %>
+            <figure class="image is-80x80">
+                <img style="width:450px;height:253px;" <%= image_tag(@publication.avatar) %> </>
+            </figure>
+<% else %>
+    <figure class="image is-80x80">
+        <img src="/assets/netflix-movies.jpg" style="object-fit:scale-down;width:450px;height:253px;" alt="">
+    </figure>
+<%end%>
+<div class="form-group">
+  <div class="col-sm-8"><%= form.file_field :avatar, class: "form-control" %></div>
+</div>
+  <!--Avatar Upload Field-->
+<br>
+<div> 
+    <%= form.label :Nombre_de_artículo_a_publicar %>
+    <%= form.text_field :name%>
+</div>
+<br>
+<div>
+    <%= form.label :Categoría %>
+    <%= form.text_field :category%>
+</div>
+<br>
+<div>
+    <%= form.label :Puntuación_artículo %>
+    <%= form.text_field :rating%>
+</div>
+<br>
+<div>
+    <%= form.label :Descripción %>
+    <%= form.text_field :description%>
+</div>
+<br>
+<div>
+    <%= form.label :Precio %>
+    <%= form.text_field :price%>
+</div>
+<br>
+<div>
+    <%= form.label :Clasificación %>
+    <%= form.text_field :clasification%>
+</div>
+<br>
+<div>
+    <%= form.label :Disponibilidad %>
+    <%= form.text_field :disponibility%>
+</div>
+<br>
+<div>
+    <%= form.label :Tipo %>
+    <%= form.text_field :tipo%>
+</div>
+<br>
+<div>
+    <%= form.submit 'Publicar película' %>
+    <p><%= link_to 'Cancelar', publications_index_path %></p>
+</div>
+</div>
+</div>
+
+<% end %>

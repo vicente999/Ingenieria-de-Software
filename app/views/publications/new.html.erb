@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulma CSS Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+
+    <body>
+    <%= form_with(model: @publication, method: :post) do |f| %>
+        <div class="hero is-fullheight">
+            <div class="hero-body is-justify-content-center is-align-items-center">
+                <div class="columns is-flex is-flex-direction-column box">
+                <a href=<%=articles_path%>>
+                  <%= image_tag("netflix-logo.png", width: 100) %>
+                </a>
+                    <div class="column">
+                        <label for="name">Nombre Artículo</label>
+                        <input class="input is-danger" type="text" placeholder="ej: Harry Potter" <%= f.text_field :name, :required => 'required'%>
+                    </div>
+                    <div class="column">
+                        <label for="category">Categoría</label>
+                        <div class="control">
+                        <%= f.select :category, ["Película", "Videojuego"] %>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label for="rating">Rating</label>
+                        <div class="control">
+                        <%= f.select :rating, ["0", "1", '2', '3', '4', '5'] %>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label for="description">Descripción</label>
+                        <input class="input is-danger" type="text" placeholder="ej: Película de Magia" <%= f.text_field :description, :required => 'required'%>
+                    </div>
+                    <div class="column">
+                        <label for="price">Precio</label>
+                        <input class="input is-danger" type="number" placeholder="ej: 5000" <%= f.text_field :price, :required => 'required'%>
+                    </div>
+                    <div class="column">
+                        <label for="clasification">Clasificación</label>
+                        <div class="control">
+                        <%= f.select :clasification, ["G", "PG", 'PG-13', 'R', 'NC-17'] %>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label for="disponibility">Disponibilidad</label>
+                        <input class="input is-danger" type="number" placeholder="ej: 12" <%= f.text_field :disponibility, :required => 'required'%>
+                    </div>
+                    <div class="column">
+                        <label for="tipo">Tipo</label>
+                        <div class="control">
+                        <%= f.select :tipo, ["Acción", "Comedia", 'Drama', 'Fantasía', 'Horror', 'Misterio', 'Romance', 'Suspenso', 'Western'] %>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label for="tipo">Imagen Publicación</label>
+                        <div class="form-group">
+                        <div class="col-sm-8"><%= f.file_field :avatar, class: "form-control" %></div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <button class="button is-danger is-fullwidth" type="submit" <%= f.submit%>Publicar</button>
+                    </div>
+                    <% end %>
+                    <div class="has-text-centered">
+                        <p class="is-size-15">
+                        <a href=<%=publications_index_path%> class="has-text-danger">Cancelar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

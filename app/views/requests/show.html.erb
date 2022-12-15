@@ -1,0 +1,28 @@
+<h1>Requests#show</h1>
+<p>
+<strong> Nombre Artículo </strong>
+<%= @request.name%>
+</p>
+
+<p>
+<strong> Nombre Solicitante </strong>
+<%= @request.user.username%>
+</p>
+
+<p>
+<strong> Fecha de Arriendo </strong>
+<%= @request.date%>
+</p>
+
+<p>
+<strong> Estado </strong>
+<%= @request.status%>
+</p>
+
+
+<%= link_to 'Atrás', requests_index_path %>
+<p><%= link_to 'Editar', requests_edit_path(:id => @request.id) %></p>
+<p><%= link_to 'Eliminar', requests_delete_path(:id => @request.id), method: :delete %></p>
+
+
+

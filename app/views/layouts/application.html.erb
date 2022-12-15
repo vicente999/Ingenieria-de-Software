@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Blockbuster</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  <% flash.each do |name, msg| %>
+  <% if msg.class == Array %>
+    <% msg.each do |message| %>
+     <article class="message is-warning">
+      <div class="message-header">
+        <p class="notice"><%= content_tag :div, message, :id => "flash_#{name}" %></p>
+        <form action=<% noti = nil %>>
+        <button class="delete" aria-label="delete"></button>
+        </form>
+      </div>
+    </article>
+    <% end %>
+  <% else %>
+    <article class="message is-warning">
+      <div class="message-header">
+        <p class="notice"><%= content_tag :div, msg, :id => "flash_#{name}" %></p>
+        <form action=<% noti = nil %>>
+        <button class="delete" aria-label="delete"></button>
+        </form>
+      </div>
+    </article>
+  <% end %>
+<% end %>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href=<%=articles_path%>>
+      <%= image_tag("netflix-logo.png", width: 100) %>
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href=<%=articles_path%> >Inicio</a>
+      <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+  <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link">
+      Cartelera
+    </a>
+
+    <div class="navbar-dropdown">
+        <a class="navbar-item" href=<%=publications_index_path%> >
+        Publicaciones
+        </a>
+      <%if current_user%>
+        <%if current_user.username != 'moderador'%>
+              <a class="navbar-item" href=<%=historial_index_path%> >
+        Historial
+        </a>
+          <a class="navbar-item" href=<%=requests_index_path%> >
+          Mis Solicitudes
+        </a>
+        <%end%>
+
+      <%end%>
+        </a>
+    </div>
+  </div>
+</nav>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Quienes Somos?
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href=<%=equipo_create_path%>>
+            Misión
+          </a>
+          <a class="navbar-item" href=<%=equipo_new_path%>>
+            Visión
+          </a>
+          <a class="navbar-item" href=<%=equipo_index_path%>>
+            Equipo
+          </a>
+          <a class="navbar-item" href=<%=contacto_index_path%>>
+            Contacto
+          </a>
+          
+        </div>
+      </div>
+    </div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<div class="navbar-item has-addons">
+    <div class="control has-icons-left has-icons-right is-expanded">
+        <input type="text" class="input is-info is-danger" placeholder="¿Qué buscas?">
+        <span class="icon is-medium is-left">
+          <i class="fa fa-pencil"></i>
+        </span>
+    </div>
+    <p class="control">
+        <a class="button is-info is-danger">BUSCAR</a>
+    </p>
+</div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+        <%if current_user%>
+          <%if current_user.username == 'moderador'%>
+              <a class= "button is-danger" href=<%=requests_index_path%>>
+                <strong>Solicitudes</strong>
+              </a>
+              <a class= "button is-danger" href=<%=users_index_url%>>
+              <strong>Ver Perfiles</strong>
+            </a>
+          <%else%>
+          <a class= "button is-danger" href=<%=users_show_url(:id => current_user.id)%>>
+              <strong>Ver Perfil</strong>
+            </a>
+          <%end%>
+        
+            <a class= "button is-danger" href=<%=destroy_user_session_path%>>
+              <strong>Cerrar sesión</strong>
+            </a>
+        <%else%>
+          <a class="button is-danger" href=<%=new_user_registration_path%>>
+            <strong>Registrarse</strong>
+          </a>
+          <a class="button is-light" href=<%=new_user_session_path%>>
+            <strong>Iniciar Sesión</strong>
+          </a>
+        <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<%= yield %>
+  
+  </body>
+</html>

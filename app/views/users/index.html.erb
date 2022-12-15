@@ -1,0 +1,44 @@
+<br>
+<br>
+
+<center>
+<h1 class="title is-2 has-text-danger">Usuarios Registrados</h1>
+
+<%= notice %>
+
+<br>
+<br>
+
+<div class="columns">
+    <% @users.each do |user| %>
+        <div class="column is-one-quarter has-background-danger-light has-text-danger">
+        <a class= 'is-size-3 has-text-danger' ><%=user.username%></a>
+        <br>
+            <% if user.avatar.present? %>
+                <figure class="image is-128x128">
+                    <img class="is-rounded" <%= image_tag(user.avatar.variant(resize_to_fill: [100, 100])) %></>
+                </figure>
+
+            <% else %>
+                <% if user.username != "moderador" %>
+                    <figure class="image is-128x128">
+                        <img class="is-rounded" <%= image_tag('avatar.jpg')%></>
+                    </figure>
+                <% else %>
+                    <figure class="image is-128x128">
+                        <img class="is-rounded" style="width:128px;height:128px;" <%= image_tag('vader.jpg', resize_to_fill: [100, 100]) %> </>
+                    </figure>
+                <% end %>
+
+            <% end %>
+        <p> Email: <%=user.email%></p>
+        
+
+        <p><%= link_to 'Ver detalles', users_show_path(:id => user.id) %></p>  
+
+        </div>
+    <% end %>
+</div>
+
+
+<%= link_to "Back", :root%>

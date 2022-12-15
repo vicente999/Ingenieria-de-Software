@@ -1,0 +1,32 @@
+<br>
+<br>
+
+<center>
+<h1 class="title is-2 has-text-danger">Reseñas</h1>
+<br>
+<br>
+
+<% @publication.resenas.each do |resena| %>
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png">
+      </p>
+    </figure>
+    <div class="media-left">
+      <div class="content">
+        <p>
+          <strong><%=@users.find_by(:id => resena.user_id).username %></strong>
+          <br>
+          <%=resena.comentario%>
+          <br>
+        </p>
+      </div>
+    </article>
+<%end%>
+<a class= "button is-danger" href=<%=resenas_new_path(:id => @publication.id)%>>
+<strong>Realizar nueva reseña</strong>
+</a>
+<a class= "button is-danger" href=<%=articles_path%>>
+<strong>Atrás</strong>
+

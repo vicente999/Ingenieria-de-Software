@@ -1,0 +1,30 @@
+<h1>Editar Solicitudes</h1>
+<%= form_with(model: @request, method: :patch, url: requests_update_path(:id => @request.id)) do |form| %>
+    <div>
+        <%= form.label :Nombre_Artículo%>
+        <%= form.text_field :name%>
+    </div>
+
+    <div>
+        <%= form.label :Nombre_Solicitante%>
+        <%= form.text_field :user, value: @request.user.username %>
+    </div>
+
+    <div>
+        <%= form.label :Fecha_Arriendo%>
+        <%= form.text_field :date%>
+    </div>
+
+    <div>
+        <%= form.label :Estado%>
+        <%= form.number_field :status, value: @request.status%>
+    </div>
+    
+    <div>
+        <%= form.submit 'Confirmar' %>
+        <p><%= link_to 'Cancelar', requests_index_path %></p>
+    </div>
+
+<% end %>
+
+

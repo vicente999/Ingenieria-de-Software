@@ -1,0 +1,63 @@
+
+<% if current_user %>
+    <% if current_user.username != 'moderador' %>
+<p class="title is-3 has-text-danger">&nbsp;&nbsp;Mi Lista</p>
+<div class="columns">
+</div>
+<%end%>
+<%end%>
+<p class="title is-3 has-text-danger">&nbsp;&nbsp;Tendencias</p>
+<div class="columns">
+
+    <% @publications.order(rating: :desc).each do |publication| %>
+        <div class="column is-one-quarter has-background-danger-light has-text-danger">
+        <% if publication.avatar.present? %>
+            <figure class="image is-80x80">
+                <%= image_tag(publication.avatar) %>
+            </figure>
+        <% else %>
+            <figure class="image is-80x80">
+                <img src="/assets/netflix-movies.jpg" alt="">
+            </figure>
+        <%end%>
+        <center>
+        <a class= 'is-size-3 has-text-danger' ><%=publication.name%></a>
+        <p><%  publication.rating.to_i.times do  %>
+                            &#11088;
+                        <% end %></p></p>
+        <a class= "button is-danger is-ligth" href=<%=publications_show_path(:id => publication.id)%>>
+        <strong>Mas Información</strong>
+        </a>
+        </center>
+        </div>
+    <% end %>
+</div>
+
+<p class="title is-3 has-text-danger">&nbsp;&nbsp;Agregadas Recientemente</p>
+<div class="columns">
+
+    <% @publications.order(created_at: :desc).each do |publication| %>
+        <div class="column is-one-quarter has-background-danger-light has-text-danger">
+        <% if publication.avatar.present? %>
+            <figure class="image is-80x80">
+                <%= image_tag(publication.avatar) %>
+            </figure>
+        <% else %>
+            <figure class="image is-80x80">
+                <img src="/assets/netflix-movies.jpg" alt="">
+            </figure>
+        <%end%>
+        <center>
+        <a class= 'is-size-3 has-text-danger' ><%=publication.name%></a>
+        <p><%  publication.rating.to_i.times do  %>
+                            &#11088;
+                        <% end %></p></p>
+        <a class= "button is-danger is-ligth" href=<%=publications_show_path(:id => publication.id)%>>
+        <strong>Mas Información</strong>
+        </a>
+            </center>
+        </div>
+    <% end %>
+</div>
+
+

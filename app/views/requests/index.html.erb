@@ -1,0 +1,115 @@
+<br>
+<br>
+
+<center>
+
+<% if current_user.username != "moderador" %>
+<h1 class="title is-2 has-text-danger">Mis Solicitudes</h1>
+    <% solicitudes = current_user.requests%>
+<% end %>
+<% if current_user.username == "moderador" %>
+<h1 class="title is-2 has-text-danger">Solicitudes</h1>
+    <% solicitudes = @requests%>
+<% end %>
+<br>
+<br>
+
+<div class="columns">
+    <% solicitudes.order(:created_at).each do |request| %>
+        <% if request.status == nil%></p>
+            <div class="column is-one-quarter has-background-danger-light has-text-danger">
+            
+            <% if request.publication.avatar.present? %>
+                <figure class="image is-80x80">
+                    <%= image_tag(request.publication.avatar) %>
+                </figure>
+            <% else %>
+                <figure class="image is-80x80">
+                    <img src="/assets/netflix-movies.jpg" alt="">
+                </figure>
+            <%end%>
+            <br>
+            <a class= 'is-size-3 has-text-danger' ><%=request.name%></a>
+            <br>
+        
+            <p> <%=request.publication.category%></p>
+            <p> <%  request.publication.rating.to_i.times do  %>
+                                &#11088;
+            <% end %></p></p>
+            <p> <%=request.publication.description%></p>
+            <p> Clasificación: <%=request.publication.clasification%></p>   
+            <p> <%=request.publication.tipo%></p>
+            <p> Usuario Solicitante: <%=link_to request.user.username, users_show_path(:id => request.user.id)%></p>
+            <p> Fecha solicitud de arriendo: <%=request.date%></p>
+            <p style="color:orange"> Estado: En Espera</p>
+            <br>
+            <% if current_user.username == "moderador" %>
+                <button type="button" class="button is-light"><%= link_to 'Aceptar solicitud', requests_edit_path(:id => request.id, status: true)%></button> 
+                <button type="button" class="button is-light"><%= link_to 'Rechazar solicitud', requests_delete_path(:id => request.id), method: :delete%></button>
+            <% end %>
+            <% if current_user.username != 'moderador'%></p>
+                <button type="button" class="button is-light"><%= link_to 'Eliminar solicitud', requests_delete_path(:id => request.id), method: :delete %></button>
+            <%end%>
+
+            </div>
+        <%end%>
+    <% end %>
+</div>
+
+
+
+<% if current_user.username != "moderador" %>
+<h1 class="title is-2 has-text-danger">Mis Solicitudes Aceptadas</h1>
+    <% solicitudes = current_user.requests%>
+<% end %>
+<% if current_user.username == "moderador" %>
+<h1 class="title is-2 has-text-danger">Solicitudes Aceptadas</h1>
+    <% solicitudes = @requests%>
+<% end %>
+<br>
+<br>
+<div class="columns">
+    <% solicitudes.order(:created_at).each do |request| %>
+        <% if request.status == true%></p>
+            <div class="column is-one-quarter has-background-danger-light has-text-danger">
+                <% if request.publication.avatar.present? %>
+                    <figure class="image is-80x80">
+                        <%= image_tag(request.publication.avatar) %>
+                    </figure>
+                <% else %>
+                    <figure class="image is-80x80">
+                        <img src="/assets/netflix-movies.jpg" alt="">
+                    </figure>
+                <%end%>
+                <br>
+                <a class= 'is-size-3 has-text-danger' ><%=request.name%></a>
+                <br>
+                
+                
+                    <p> <%=request.publication.category%></p>
+                    <p> <%  request.publication.rating.to_i.times do  %>
+                                        &#11088;
+                    <% end %></p></p>
+                    <p> <%=request.publication.description%></p>
+                    <p> Clasificación: <%=request.publication.clasification%></p>   
+                    <p> <%=request.publication.tipo%></p>
+                
+                <p> Usuario Solicitante: <%=link_to request.user.username, users_show_path(:id => request.user.id)%></p>
+                <p> Fecha solicitud de arriendo: <%=request.date%></p>
+                <p style = "color:green"> Estado: Solicitud Aceptada</p>
+                <% if current_user.username == 'moderador'%></p>
+                <button type="button" class="button is-light"><%= link_to 'Devolver Artículo', requests_edit_path(:id => request.id, status: true, devolucion:true) %></button>
+                <%end%>
+
+             
+            </div>
+        <% end %>
+    <% end %>
+</div>
+
+<%if current_user.username == "moderador" or current_user.username = "admin"%>
+<%= link_to "Back", :root %>
+<%else%>
+<%= link_to 'Realizar nueva solicitud', requests_new_path(:id => publication.id) %>  
+<%= link_to "Back", :root %>
+<% end %>

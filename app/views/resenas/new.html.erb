@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <center>
+    <h1 class="title is-2 has-text-danger">Crear Reseña</h1>
+    <%= form_with(model: @resena, method: :post) do |form| %>
+        <article class="media">
+            <% if current_user.avatar.present? %>
+            </figure>
+                <figure class="image is-80x80">
+                    <%= image_tag(current_user.avatar) %>
+                </figure>
+            <% else %>
+            <figure class="media-left">
+            <p class="image is-64x64">
+                <img src="/assets/avatar.jpg">
+            </p>
+            </figure>
+            <%end%>
+        <div class="media-content">
+            <div class="field">
+            <p class="control">
+                <input class="textarea" type="text" placeholder="Escribe tu reseña..." <%= form.text_field :comentario%>
+            </p>
+            </div>
+        </div>
+        </article>
+        <div class="field from-group"> 
+            <%= form.text_field :publication_id, class:"from-control", value: @publication.id, type: :hidden%>
+        </div>
+        <div class="field from-group"> 
+            <%= form.text_field :user_id, class:"from-control", value: current_user.id, type: :hidden%>
+        </div>
+        <%= form.submit 'Publicar Reseña' %>
+        <%= link_to 'Cancelar', resenas_index_path(:id => @publication.id) %>
+    <% end %>
+</html>

@@ -1,0 +1,22 @@
+<h1>Mostrar Mensaje</h1>
+
+<table align='center'>
+    <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>Mensaje</th>
+        <th colspan='7'></th>
+    </tr>    
+    </thead>
+    <tbody>
+            <td><%= @chat.usuario%></td>
+            <td><%= @chat.mensaje%></td>
+
+    </tbody>
+
+    
+</table>
+
+<%= link_to 'Atras', chats_index_path %>
+<%= link_to 'Editar', chats_edit_path(:id => @chat.id) %>
+<%= link_to 'Eliminar', chats_delete_path(:id => @chat.id), method: :delete %>

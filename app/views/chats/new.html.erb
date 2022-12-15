@@ -1,0 +1,20 @@
+<h1>Chats#new</h1>
+
+<%= form_with(model: @chat, method: :post) do |form| %>
+
+<div> 
+    <%= form.label :Nombre_Usuario %>
+    <%= form.text_field :usuario%>
+</div>
+
+<div> 
+    <%= form.label :Mensaje %>
+    <%= form.text_field :mensaje%>
+</div>
+
+<div>
+    <%= form.submit 'Enviar' %>
+    <p><%= link_to 'Cancelar', chats_index_path %></p>
+</div>
+
+<% end %>

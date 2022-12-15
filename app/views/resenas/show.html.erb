@@ -1,0 +1,26 @@
+<h1>Resenas#show</h1>
+<p>
+<strong> Nombre Artículo </strong>
+<%= @resena.name%>
+</p>
+
+<p>
+<strong> Categoría </strong>
+<%= @resena.category%>
+</p>
+
+<p>
+<strong> Clasificación </strong>
+<%= @resena.stars%>
+</p>
+
+<p>
+<strong> Descripción </strong>
+<%= @resena.description%>
+</p>
+
+<%= link_to 'Atrás', resenas_index_path %>
+<p><%= link_to 'Editar', resenas_edit_path(:id => @resena.id) %></p>
+<p><%= link_to 'Eliminar', resenas_delete_path(:id => @resena.id), method: :delete %></p>
+
+

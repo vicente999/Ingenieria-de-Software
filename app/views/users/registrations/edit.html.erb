@@ -1,0 +1,83 @@
+<br>
+<br>
+<center>
+<h1 class="title is-2 has-text-danger"> Editar Publicación <%= resource_name.to_s.humanize %></h1>
+<div class="column">
+<div class="column is-quarter has-background-danger-light has-text-danger">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <!--Avatar Upload Field-->
+  <% if current_user.avatar.present? %>
+  <figure class="image is-128x128">
+    <img class="is-rounded" <%= image_tag(current_user.avatar.variant(resize_to_fill: [100, 100])) %></>
+  </figure>
+  <% else %>
+    <% if current_user.username != "moderador" %>
+        <figure class="image is-128x128">
+            <img class="is-rounded" <%= image_tag('avatar.jpg')%></>
+        </figure>
+    <% else %>
+        <figure class="image is-128x128">
+            <img class="is-rounded" style="width:128px;height:128px;" <%= image_tag('vader.jpg', resize_to_fill: [100, 100]) %> </>
+        </figure>
+    <% end %>
+
+  <% end %>
+  <div class="form-group">
+  <div class="col-sm-8"><%= f.file_field :avatar, class: "form-control" %></div>
+  </div>
+  <br>
+
+  <!--Avatar Upload Field-->
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthdate %><br />
+    <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+<% end %>
+
+<br>
+
+<p>¿Estás infeliz? <%= button_to "Eliminar cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?" }, method: :delete %></p>
+
+<%= link_to "Atrás", users_show_path(:id => current_user.id) %>
+</div>
+</div>
+
